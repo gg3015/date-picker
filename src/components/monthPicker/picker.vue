@@ -1,7 +1,7 @@
 <template>
   <section :id="`piacker_${type}`" >
     <div :id="id" >
-      <button v-for="(item, index) in list" :key="index" @touchstart="start" @touchend="end"  @click="btnClick(item.value)" :class="{ pickerSelected: selected == item.value }" :style="style" :disabled="item.disabled"> {{ item.value }} </button>
+      <button v-for="(item, index) in list" :key="index" @touchstart="start" @touchmove="move" @touchend="end"  @click="btnClick(item.value)" :class="{ pickerSelected: selected == item.value }" :style="style" :disabled="item.disabled"> {{ item.value }} </button>
     </div>
   </section>
 </template>
@@ -76,6 +76,7 @@ export default {
       this.touchEnd = false
       this.firstScrollTop = this.scrollTop
     },
+    move () { this.touchEnd = true },
     endCallback (scrollTop) {
       let itemHeight = this.height || 40
       // 滚动距离大于0.75 个按钮高才触发
