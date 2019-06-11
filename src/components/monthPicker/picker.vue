@@ -48,7 +48,8 @@ export default {
   },
   mounted () {
     let ctx = this
-    this.scrollMiddle()
+    //this.scrollMiddle()
+    this.$nextTick(()=>{this.scrollMiddle(100)})
     let delayedExec = function (delay) {
       let timer
       return function () {
@@ -138,7 +139,7 @@ export default {
         let marginBottom = this.marginBottom || 3
         panel.scrollTop = selected.clientHeight * index + index * marginBottom + selected.clientHeight / 2
         this.first = true
-      })
+      },i?i:10)
     }
   }
 }
@@ -153,6 +154,7 @@ export default {
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    -webkit-overflow-scrolling:touch;
     &::-webkit-scrollbar {
       display: none;
     }
